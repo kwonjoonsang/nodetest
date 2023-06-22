@@ -1,0 +1,4 @@
+# console command
+
+## Global Object
+### 
