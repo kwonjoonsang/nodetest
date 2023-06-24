@@ -67,7 +67,7 @@ var sum = 1 + 2;
 ###### Undefined : var로 선언된 변수에 암묵적으로 할당되는 값
 ###### null : 값이 없음
 ###### symbol : ES6에 추가된 type
-###### Object : 객체, 함수, 배열 
+###### Object : 객체, 함수, 배열
 
 #### 숫자 타입
 ###### 64 Bit 부동소수점 형식을 따른다.
@@ -180,15 +180,70 @@ var foo = 1;
 console.log(typeof foo);
 ```
 
-# 연산자
-
-# 형변환
-
 # 조건문 반복문
+#### 조건문(if, else)
+```ecmascript 6
+if(조건식1)
+{
+    
+}
+else if(조건식2)
+{
+    
+}
+else
+{
+    
+}
 
-# 함수
+//삼항 조건 연산자
+var result = x%2 ? '홀수' : '짝수';
+```
 
-# 클래스
+#### 조건문(switch)
+```ecmascript 6
+switch(표현식)
+{
+    case 표현식1:
+        break;
+    case 표현식2:
+        break;
+    default:
+        
+}
+```
 
-# 객체지향 프로그래밍
+#### 반복문(for)
+```ecmascript 6
+for (var i = 0; i < 2; i++)
+{
+    console.log(i);
+}
+```
 
+#### 반복문(while)
+```ecmascript 6
+var count = 9;
+
+while (count < 3)
+{
+    console.log(count);
+    count++;
+}
+
+//무한루프
+while(true) { }
+```
+
+#### 반복문(do ~ while)
+```ecmascript 6
+var count = 0;
+
+do {
+    console.log(count);
+    count++;
+} while(count < 3);
+```
+
+#### 반복 탈출(break)
+#### 반복 탈출(continue)
