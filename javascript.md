@@ -105,6 +105,81 @@ str = `문자열`;    //백틱(ES6)
 str = '작은 따움표로 감싼 문자열 내의 "큰 따움표"는 문자열로 인식된다';
 str = "큰 따움표로 감싼 문자열 내의 '작은따움표'는 문자열로 인식된다";
 ```
+
+#### 템플릿 리터럴
+###### Multi Line String, 표현식 삽입, Tagged template 등 편리한 문자열 처리 기능 제공
+###### 템플릿 리터럴은 런타임에 일반 문자열로 변환
+###### 작은 따움표, 큰따움표 대신 백틱(`)을 사용함
+###### 일반 문자열 내에서 줄바꿈 등의 공백을 표현하려면 백슬래시로 시작하는 이스케이프 시퀀스를 사용해야함
+이스케이프 시퀀스|의미
+:-------:|:------------------------------------------
+\0|Null
+\b|백스페이스
+\f|Form Feed : 프린터로 출력할 경우  다음 페이지의 시작 지점으로 이동
+\n|개행(LR) : 다음행으로 이동
+\r|개행(CR) : 커서를 처음으로 이동
+\t|Tab수평
+\v|Tab수직
+\uXXXX|Unicode
+\'| 작은 따움표
+\"| 큰 따움표
+\\|백슬레시
+
+```ecmascript 6
+var template = `<ul>
+    <li><a href="#">Home</a></li>
+</ul>`;
+
+console.log(template);
+```
+
+###### 문자열의 경우 문자열 연산자 +를 사용해 연결할 수 있음
+###### 표현식을 삽입하려면 ${}으로 표현식을 감싼다. 이때 값은 문자열로 강제로 변환되어 삽입된다.
+```ecmascript 6
+// ES5 : 문자열 연결
+var first = 'first-test';
+var second = 'second-test';
+
+console.log('My name is ' + first + ' ' + second);
+
+// ES6 : 표현식 삽입
+console.log(`My name is ${first} ${second}`);
+```
+
+#### Boolean
+###### true, false로만 구성되어 있음
+
+#### undefined
+###### var로 선언한 변수는 암묵적으로 undefined로 초기화됨
+###### 변수 선언에 의해 메모리 할당이 이루어질때까지 빈 상태로 내벼러 두지 않고 undefiend로 초기화한다.
+###### 개발자가 의도적으로 할당하기 위한 값이 아닌 자바 스크립트 엔진이 변수를 초기화 할 때 사용하는 값
+###### undefined가 반환되면 참조한 변수가 선언 이후 값이 할당한 적이 없는 초기화되지 않는 변수임
+###### javascript 엔진에서 변수를 초기화할때 사용하는 undefined를 개발자가 할당하는 것을 권장하지 않는다.
+###### 개발자가 명시하고 싶을때는 null을 할당한다.
+
+#### null 타입
+###### 대소문자를 구분하므로 null로만 사용가능
+###### 변수에 null을 할당하는 것은 참조를 명시적으로 제거하는 것을 의미
+
+#### Symbol Type
+###### ES6에서 추가된 7번째 타입으로 변경 불가능한 원시타입 값
+
+#### Object Type
+###### Javascript는 Object 기반의 언어이며 Javascript를 이루는 거의 모든 것이 Object
+###### 지금까지 알아본 모든 Datay Type 이외의 값은 모두 Object임
+
+#### 동적 타이핑
+###### C나 Java 같은 Static Type 언어는 변수를 선언할때 Data Type이 미리 선언해야함
+###### Static Type 언어는 Compile 시점에 Type Check를 수행하며 해당 부분에 에러를 발생함
+###### Javascript는 변수를 선언할 때 Type을 선언하지 않는다. 할당은 자유롭게 한다.
+###### Javascript는 값을 할당하는 시점에 변수의 타입이 동적으로 결정됨. Javascript의 변수는 선언이 아닌 할당에 의해 Type이 결정
+###### 재할당에 의해 변수의 Type은 언제든지 동적으로 변할 수 있음 이러한 특징을 동적 타이핑이라함
+```ecmascript 6
+// typeof를 사용하여 Data Type을 확인할 수 있음
+var foo = 1;
+console.log(typeof foo);
+```
+
 # 연산자
 
 # 형변환
