@@ -247,3 +247,72 @@ do {
 
 #### 반복 탈출(break)
 #### 반복 탈출(continue)
+
+# 형변환
+#### 타입 변환
+###### 타입 변환이 기존 원시 값을 직접 변경하는 것은 아님(원시 값은 변경 불가능한 값)
+###### 타입 변환은 기존 원시 값을 사용해 다른 타입의 새로운 원시 값을 생성하는 것
+###### 명시적 타입 변환이 좋은것은 아니며 암묵적 타입 변환이 더욱 간결할 수 있음(중요한 것은 코드를 예측 가능해야함)
+```ecmascript 6
+//명시적
+(10).toString()
+
+//암묵적
+10 + ''
+```
+
+#### 명시적 타입 변환 or type casting
+###### 문자열 타입으로 변환
+###### 숫자 타입으로 변환
+###### Boolean 타입으로 변환
+
+#### 암묵적 타입 변환 or type 강제 변환
+###### 문자열
+###### +로 문자열 타입과 숫자 타입을 연결하면 문자열로 암묵적으로 변환되어짐
+```ecmascript 6
+// 숫자 타입
+0 + ''          // "0"
+-0 + ''         // "0"
+Nan + ''        // "Nan"
+Infinity + ''   // "Infinity"
+
+// 불리언 타입
+true + ''       // "true"
+false + ''      // "false"
+
+// null 타입
+null + ''       // "null"
+
+// undefined 타입
+undefined + ''  // "undefined"
+
+// symbol 타입
+(Symbol()) + '' // Type Error
+
+// 객체 타입
+({}) + ''       // "[Object Object]"
+Math + ''           // "[Object Math]"
+[] + ''             // ""
+[10, 20] + ''       // "10,20"
+(function(){}) + '' //"function(){}"
+Array + ''          //"function Array() { [native code] }"
+```
+###### 숫자 타입
+###### 산술 연산자의 모든 피연산자는 모두 숫자 타입이어야함
+###### 자바스크립트는 숫자 타입은 자동으로 숫자로 변경하여 연산함
+###### 숫자로 변경이 불가능한 경우 결과는 NaN이 된다.
+
+###### Boolean 타입
+###### 자바스크립트는 조건식의 평가 결과를 Boolean 타입으로 암묵적 타입 변환을 한다.
+```ecmascript 6
+if ('') console.log('1');
+if (true) console.log('2');
+if (0) console.log('3');
+if ('str') console.log('4');
+if (null) console.log('5');
+
+// 2,4
+```
+###### falsy 값
+###### false, undefined, null, 0, -0, Nan, ''
+###### falsy 값을 제외한 값은 다 true로 평가
