@@ -262,10 +262,88 @@ do {
 ```
 
 #### 명시적 타입 변환 or type casting
+###### 변환 방법 : 표준 빌트인 생성자 함수를 new 연산자 없이 호출, 빌트인 메서드 사용, 암묵적 타입 변환
 ###### 문자열 타입으로 변환
-###### 숫자 타입으로 변환
-###### Boolean 타입으로 변환
+```ecmascript 6
+// 1. String 생성자 함수를 new 연산자 없이 호출하는 방법
+// 숫자 타입 -> 문자열 타입
+String(1);          // -> "1"
+String(NaN);        // -> "NaN"
+String(Infinity);   // -> "Infinity"
+// Boolean -> 문자열 타입
+String(true);       // -> "true"
+String(false);      // -> "false"
 
+// 2. Object.prototype.toString 메서드를 사용하는 방법
+// 숫자 -> 문자열
+(1).toString();         // -> "1"
+(NaN).toString();       // -> "NaN"
+(Infinity).toString();      // -> "Infinity"
+// Boolean -> 문자열
+(true).toString();          // -> "true"
+(false).toString();         // -> "false"
+
+// 3.문자열 연결 연산자를 이용하는 방법
+// 숫자 -> 문자열
+1 + '';         // -> "1"
+NaN + '';       // -> "NaN"
+Infinity + '';  // -> "Infinity"
+// Boolean -> 문자열
+true + '';      // -> "true"
+false + '';     // -> "false"
+```
+###### 숫자 타입으로 변환
+```ecmascript 6
+// 1. Number 생성자 함수를 new 연산자 없이 호출하는 방법
+Number('0');            // -> 0
+Number('13.53');        // -> 13.53
+Number(true);           // -> 1
+Number(false);          // -> 0
+
+// 2. parseInt, parseFloat 함수를 사용하는 방법
+parseInt('0');          // -> 0
+parseFloat('10.53');    // -> 10.53
+
+// 3. + 단항 산술 연산자르 ㄹ이용하는 방법
++'0';                   // -> 0
++'10.53';                // -> 10.53
++true;                  // -> 1
++false;                 // -> 0
+
+// 4. * 산술 연산자를 이용하는 방법
+'0' * 1;        // -> 0
+'10.53' * 1;    // -> 10.53
+true * 1;       // -> 1
+false * 1;      // -> 0
+```
+###### Boolean 타입으로 변환
+```ecmascript 6
+// 1. Boolean 생성자 함수를 new 연산자 없이 호출하는 방법
+Boolean('x');       // -> true
+Boolean('');        // -> false
+Boolean('false');   // -> true
+Boolean(0);         // -> false
+Boolean(1);         // -> true
+Boolean(NaN);       // -> false
+Boolean(Infinity);  // -> true
+Boolean(null);      // -> false
+Boolean(undefined); // -> false
+Boolean({});        // -> true
+Boolean([]);        // -> true
+
+// 2. ! 부정 논리 연산자를 두번 사용하는 방법
+!!'x';          // -> true
+!!'';           // -> false
+!!'false';      // -> true
+!!0;            // -> false
+!!1;            // -> true
+!!NaN;          // -> false
+!!Infinity;     // -> true
+!!null;         // -> false
+!!undefined;        // -> false
+!!{};           // -> true
+!![];           // -> true
+```
 #### 암묵적 타입 변환 or type 강제 변환
 ###### 문자열
 ###### +로 문자열 타입과 숫자 타입을 연결하면 문자열로 암묵적으로 변환되어짐
@@ -315,4 +393,4 @@ if (null) console.log('5');
 ```
 ###### falsy 값
 ###### false, undefined, null, 0, -0, Nan, ''
-###### falsy 값을 제외한 값은 다 true로 평가
+###### falsy 값을 제외한 값은 다 true로 평가중
