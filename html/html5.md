@@ -87,7 +87,7 @@ id|문자열|이미지 고유 ID 표시
 ```
 
 #### 시멘틱 태그 영역
-![img.png](img.png)
+![img.png](../img/img.png)
 
 #### 시멘틱 태그 예
 ```html
