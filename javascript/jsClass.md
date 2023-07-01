@@ -128,3 +128,8 @@ var person = {
 person.age = 20;
 delete person.age;
 ```
+
+
+# 클래스
+
+# 객체지향 프로그래밍
