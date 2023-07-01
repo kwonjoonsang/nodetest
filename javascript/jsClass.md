@@ -26,8 +26,22 @@ var count = {
 };
 ```
 #### 프로퍼티 : 객체의 상태를 나타내는 값
-#### 메서드 : 프로퍼티를 참조하고 조작할 수 있는 동작
+###### 객체는 프로퍼티의 집합이며 프로퍼티는 키와 값으로 구성됨
 
+#### 메서드 : 프로퍼티를 참조하고 조작할 수 있는 동작
+###### 프로퍼티 값이 함수일 경우 일반 함수와 구분하기 위해 method라고 부른다. 메서드는 객체에 묶여 있는 함수를 의미함
+```ecmascript 6
+var circle = {
+    radius: 5,      //프로퍼티
+  
+  getDiameter: function() {     //method
+        return 2 * this.radius;
+  }
+};
+
+console.log(circle.getDiameter());
+
+```
 ## 객체 생성
 #### 객체 생성 방법
 * 객체 리터럴
@@ -68,4 +82,49 @@ var foo = {
 };
 
 ```
+#### 프로퍼티 접근
+```ecmascript 6
+var person = {
+    name: 'Lee'
+};
 
+// 마침표 표기법
+console.log(person.name);
+// 대괄호 표기법
+console.log(person['name']);
+```
+###### 마침표 프로퍼티 접근 연산자를 사용하는 마침표 표기법
+###### 대괄호 프로퍼티 접근 연산자를 사용하는 대괄호 표기법
+
+#### 프로퍼티 값 갱신
+###### 이미 존재하는 프로퍼티에 값을 할당하면 프로퍼티 값이 갱신됨
+```ecmascript 6
+var person = {
+    name: 'Lee'
+};
+
+person.name = 'Kim';
+
+console.log(person);
+```
+
+#### 프로퍼티 동적 생성
+###### 존재하지 않은 프로퍼티에 값을 할당하면 프로퍼티가 동적 생성 추가 값이 할당된다.
+```ecmascript 6
+var person = {
+    name: 'Lee'
+};
+
+person.age = 20;
+```
+#### 프로퍼티 삭제
+###### delete 연산자는 객체의 프로퍼티를 삭제한다.
+###### 존재하지 않는 프로퍼티를 삭제하면 아무런 에러 없으 무시된다.
+```ecmascript 6
+var person = {
+    name = 'Lee'
+};
+
+person.age = 20;
+delete person.age;
+```
