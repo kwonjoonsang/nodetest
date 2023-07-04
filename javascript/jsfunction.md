@@ -193,3 +193,131 @@ console.log(x);
 * 암묵적 결합
 * 긴 생명 주기
 * 스코프 체인 상에서 종점에 존재
+
+#### 즉시 실행 함수
+###### 함수 정의와 동시에 호출되는 즉시 실행함수는 한번만 호출되기 때문에 모든 변수는 즉시 실행 함수의 지역 변수가 된다.
+```ecmascript 6
+(function() {
+    var foo = 10;
+}());
+
+console.log(foo);       // ReferenceError : foo is not defined
+```
+
+#### ES6 Module
+###### ES6 Module을 사용하면 더는 전역 변수를 사용할 수 없음
+###### ES6 Module은 파일 자체의 독자적인 Module Scope를 제공하여 Module 내에서 var 변수는 더이상 전역 변수가 아님
+###### script tag에 type="module" 어트리뷰트를 추가하면 로드된 자바스크립트 파일은 Module로써 동작함 확장자는 mjs를 권장함
+```ecmascript 6
+<script type="module" src="live.mjs"></script>
+<script type="module" src="app.mjs"></script>
+```
+###### ES6 module은 구형 브라우저에서 동작하지 않는다.
+
+## let, const, Block Level Scope
+## var 키워드 변수의 문제점
+###### ES5까지 변수를 선언할 수 있는 유일한 방법은 var키워드를 사용함. 해당 키워드 사용 시 아래와 같은 특징이 있음
+#### 변수 중복 선언 허용
+###### var 키워드로 선언한 변수는 중복 선언이 가능함
+```ecmascript 6
+var x = 1;
+var y = 2;
+
+var x = 3;
+var y;
+
+// 재선언 및 값 할당이 된 변수는 해당 값으로 갱신되며 값 할당 없이 선언만 된 변수는 무시되어 기존 값을 사용한다.
+console.log(x);         //3
+console.log(y);         //2
+
+```
+
+#### 함수 레벨 스코프
+###### var 키워드로 선언한 변수는 함수 코드 블록 만을 지역 스코프로 인정하고 나머지는 모두 전역 변수가 된다.
+###### for문에서 var로 선언된 변수는 전역 변수가 된다
+```ecmascript 6
+var x = 1;
+
+if(true) {
+    var x = 10;
+}
+
+console.log(x);             //10
+```
+
+#### 변수 호이스팅
+###### var 키워드로 변수를 선언하면 변수 호이스팅에 의해 변수는 선두에서 선언된 거처럼 동작한다. 값이 할당되기 전에는 해당 변수 값은 undefined이다
+###### 변수 선언문 이전에 변수 참조하는 것은 변수 호이스팅에 의해 에러는 발생하지 않지만 가독성을 해친다.
+```ecmascript 6
+console.log(foo);           //undefined
+
+foo = 123;
+
+console.log(foo);           //123
+```
+
+## let
+###### var 키워드 단점을 보완하기 위해 ES6부터 새로운 변수 키워드 let, const를 도입했다.
+
+#### 변수 중복 선언 금지
+###### let의 경우 변수 중복 선언 시 에러를 발생한다.
+```ecmascript 6
+//var의 경우 아래 구문이 중복으로 선언이 가능해 오류 발생하지 않는다.
+var foo = 123;
+var foo = 456;
+
+//let의 경우 아래 구문에서 Syntax오류가 발생한다.
+let bar = 123;
+let bar = 456;
+```
+
+#### 블록 레벨 스코프
+###### let 키워드로 선언한 변수는 모든 코드 블록을 지역 스코프로 인정하는 블록 레벨 스코프를 따른다.
+```ecmascript 6
+let foo = 1;            // 전역 변수
+
+{
+    let foo = 2;        // 지역 변수
+    let bar = 3;        // 지역 변수
+}
+
+console.log(foo);       // 1
+console.log(bar);       // referenceerror : bar is not defined
+```
+#### 변수 호이스팅
+###### let으로 선언한 변수는 변수 호이스팅이 발생하지 않는 것처럼 동작한다.
+###### var로 선언한 변수는 런타임 이전에 암묵적으로 선언, 초기화 단계가 한번에 진행됨
+###### 즉 선언 단계에서 변수 식별자를 등록해 변수 존재를 알리고 즉시 초기화 단계에서 undefined로 초기화한다.
+###### let으로 선언한 변수는 선언과 초기화 단계가 분리되어 진행한다. 런타임 이전에 암묵적으로 선언단계가 실행되지만 초기화 단계는 선언문에 도달했을때 실행됨
+###### 만약 초기화 이전에 변수에 접근하면 참조 에러(ReferenceError)가 발생한다.
+###### 스코프의 시작 지점에서 초기화 시작지점까지 변수를 참조 못하는 구간을 일시적 사각지대라고 함
+###### 자바스크립트는 Es6에서 도입된 let, const를 포함한 모든 선언(var, let, const, function, class등)을 호이스팅 한다.
+###### 단 ES6에 도입된 let, const, class를 사용한 선언문은 호이스팅이 발생하지 않는거처럼 동작한다.
+```ecmascript 6
+console.log(foo);       //ReferenceError: foo is not defined
+let foo;
+```
+
+#### 전역 객체와 let
+###### var 키워드로 선언한 전역 변수와 함수 그리고 선언하지 않은 변수에 값을 할당한 암묵적 전역은 전역 객체 window의 프로퍼티가 됨
+###### 전역 객체의 프로퍼티 참조 시 window를 생략할 수 있음
+###### let으로 선언한 전역 변수는 전역 객체의 프로퍼티가 아니다. 즉 window.foo와 같이 호출이 불가능함
+```ecmascript 6
+// 전역 변수
+var x = 1;
+// 암묵적 전역 변수
+y = 2;
+// 전역 함수
+function foo() {}
+
+// var키워드로 선언한 전역 변수는 전역 객체 window의 프로퍼티임
+console.log(window.x);      //1
+console.log(x);             //1
+
+console.log(window.y);      //2
+console.log(y);             //2
+
+console.log(window.foo);    // foo() {}
+console.log(foo);           // 위동
+```
+
